@@ -75,30 +75,27 @@
     { key: 'hf_pyramid_slope_inv', name: 'Inverted pyramid slope' }
   ];
   var tabs = document.getElementById('terrain-tabs');
-  var tv = document.getElementById('terrain-video');
-  if (tabs && tv) {
-    var state = { key: TERRAINS[0].key, view: 'side' };
+  var tvs = [document.getElementById('terrain-video'), document.getElementById('terrain-video-rear')];
+  if (tabs && tvs[0]) {
     var base = 'static/videos/terrain/';
+    var views = ['side', 'rear34'];
     var panel = document.getElementById('terrain-panel');
-    var setTerrain = function (key, keepTime) {
+    var setTerrain = function (key) {
       var t = TERRAINS.filter(function (x) { return x.key === key; })[0];
-      state.key = key;
       if (panel) panel.setAttribute('aria-labelledby', 'terrain-tab-' + key);
       tabs.querySelectorAll('button').forEach(function (b) {
         var on = b.dataset.key === key;
         b.setAttribute('aria-selected', String(on));
         b.tabIndex = on ? 0 : -1;
       });
-      var caption = document.getElementById('terrain-caption');
-      if (caption) caption.textContent = t.name;
-      var stem = base + key + '_' + state.view;
-      if (keepTime) {
-        swapVideo(tv, stem + '.mp4', stem + '.jpg');
-      } else {
+      tvs.forEach(function (tv, k) {
+        if (!tv) return;
+        var stem = base + key + '_' + views[k];
         tv.poster = stem + '.jpg';
         tv.dataset.src = stem + '.mp4';
+        tv.setAttribute('aria-label', t.name + (k ? ', rear view' : ', side view'));
         if (tv.getAttribute('src') || tv.dataset.visible === '1') { tv.src = stem + '.mp4'; tv.load(); tryPlay(tv); }
-      }
+      });
     };
     TERRAINS.forEach(function (t, i) {
       var b = document.createElement('button');
@@ -109,35 +106,52 @@
       b.dataset.key = t.key;
       b.innerHTML = '<img alt="" loading="lazy" src="static/images/terrain/' + t.key + '.jpg"><span></span>';
       b.querySelector('span').textContent = t.name;
-      b.addEventListener('click', function () { setTerrain(t.key, false); });
+      b.addEventListener('click', function () { setTerrain(t.key); });
       b.addEventListener('keydown', function (ev) {
         var n = TERRAINS.length;
         var j = ev.key === 'ArrowRight' ? (i + 1) % n : ev.key === 'ArrowLeft' ? (i - 1 + n) % n
           : ev.key === 'Home' ? 0 : ev.key === 'End' ? n - 1 : -1;
         if (j < 0) return;
         ev.preventDefault();
-        setTerrain(TERRAINS[j].key, false);
+        setTerrain(TERRAINS[j].key);
         tabs.querySelectorAll('button')[j].focus();
       });
       tabs.appendChild(b);
     });
-    document.querySelectorAll('#terrain-view button').forEach(function (b) {
-      b.addEventListener('click', function () {
-        if (b.getAttribute('aria-pressed') === 'true') return;
-        document.querySelectorAll('#terrain-view button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-        state.view = b.dataset.view;
-        setTerrain(state.key, true);
+    setTerrain(TERRAINS[0].key);
+    tvs.forEach(function (tv) { if (tv) watch(tv); });
+  }
+
+  // ---------- method step-through (mirrors the slide deck) ----------
+  var ms = document.getElementById('method-steps');
+  if (ms) {
+    var mBtns = ms.querySelectorAll('.method-tabs button');
+    var mCur = 0, mTimer = null, mAuto = !reduceMotion;
+    var showStep = function (n) {
+      mCur = n;
+      ms.classList.toggle('dimmed', n > 0);
+      ms.querySelectorAll('[data-step]').forEach(function (el) {
+        var on = Number(el.dataset.step) === n;
+        if (el.tagName === 'BUTTON') el.setAttribute('aria-selected', String(on));
+        else if (el.tagName === 'P') el.hidden = !on;
+        else el.classList.toggle('on', on);
       });
+    };
+    var tick = function () { showStep((mCur + 1) % mBtns.length); };
+    var start = function () { if (mAuto && !mTimer) mTimer = setInterval(tick, 5000); };
+    var stop = function () { clearInterval(mTimer); mTimer = null; };
+    mBtns.forEach(function (b) {
+      b.addEventListener('click', function () { mAuto = false; stop(); showStep(Number(b.dataset.step)); });
     });
-    setTerrain(state.key, false);
-    watch(tv);
+    new IntersectionObserver(function (es) { if (es[0].isIntersecting) start(); else stop(); }, { threshold: 0.4 }).observe(ms);
+    showStep(0);
   }
 
   // track visibility for swapVideo()
   var vis = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) { e.target.dataset.visible = e.isIntersecting ? '1' : '0'; });
   }, { threshold: 0.25 });
-  document.querySelectorAll('video.lazy, #terrain-video').forEach(function (v) { vis.observe(v); });
+  document.querySelectorAll('video.lazy, #terrain-video, #terrain-video-rear').forEach(function (v) { vis.observe(v); });
 
   // ---------- lightbox ----------
   var lb = document.getElementById('lightbox');

@@ -13,7 +13,9 @@
   <meta property="og:image" content="https://wheelstrider.github.io/static/images/og.jpg">
   <meta property="og:url" content="https://wheelstrider.github.io/">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="static/images/favicon-64.png">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -76,7 +78,7 @@
   <section class="section" id="overview">
     <div class="container wide">
       <p class="tagline">One perceptive policy that <span class="roll">rolls</span>, <span class="step">steps</span>, climbs stairs and side-steps, with no mode switching.</p>
-      <div class="grid cols-3 highlights">
+      <div class="grid cols-4 highlights">
           <figure class="clip zoomable">
             <div class="media"><span class="badge">Real robot · 1×</span>
               <video class="lazy" muted loop playsinline preload="none" poster="static/videos/real/indoor_roll_step_roll.jpg" data-src="static/videos/real/indoor_roll_step_roll.mp4"></video></div>
@@ -91,6 +93,11 @@
             <div class="media"><span class="badge">Real robot · 1×</span>
               <video class="lazy" muted loop playsinline preload="none" poster="static/videos/real/grass_sideways.jpg" data-src="static/videos/real/grass_sideways.mp4"></video></div>
             <figcaption>Lateral stepping on grass</figcaption>
+          </figure>
+          <figure class="clip zoomable">
+            <div class="media"><span class="badge">Real robot · 1×</span>
+              <video class="lazy" muted loop playsinline preload="none" poster="static/videos/real/indoor_flat_2.jpg" data-src="static/videos/real/indoor_flat_2.mp4"></video></div>
+            <figcaption>Rolling across the lab floor</figcaption>
           </figure>
       </div>
     </div>
@@ -132,31 +139,39 @@
   <section class="section alt" id="method">
     <div class="container">
       <div class="section-head"><h2>Method</h2></div>
-      <figure class="figure paper">
-        <a class="img-link" href="static/images/framework.jpg" target="_blank" rel="noopener" title="Open the full-size figure"><img src="static/images/framework.jpg" alt="WheelStrider framework: a privileged teacher encoder, a depth CNN and GRU student encoder, a shared actor trained with PPO, a multi-horizon latent dynamics predictor, and the deployment pipeline that keeps only the student encoder and shared actor." loading="lazy" width="2400" height="1247"></a>
-      </figure>
-      <div class="cards">
-        <div class="card">
-          <span class="idx">1</span>
-          <h3>Perceptive teacher–student</h3>
-          <p>A privileged teacher guides a student that sees the terrain ahead through onboard depth.</p>
+      <div class="method-steps" id="method-steps">
+        <div class="method-fig">
+          <img src="static/images/framework.jpg" alt="WheelStrider framework: a privileged teacher encoder, a depth CNN and GRU student encoder, a shared actor trained with PPO, roughness-based reward gating, a latent dynamics predictor, and the deployment pipeline." width="2400" height="1247">
+          <svg viewBox="0 0 2400 1247" preserveAspectRatio="none" aria-hidden="true">
+            <defs><mask id="method-mask"><rect width="2400" height="1247" fill="#fff"/>
+      <polygon class="hole" fill="#000" data-step="1" points="63,104 63,370 1098,370 1098,640 2340,640 2340,331 1228,331 1228,104 63,104"/>
+      <polygon class="hole" fill="#000" data-step="2" points="1140,333 1140,780 2385,780 2385,333 1140,333"/>
+      <polygon class="hole" fill="#000" data-step="3" points="1095,141 1095,333 2298,333 2298,141 1095,141"/>
+      <polygon class="hole" fill="#000" data-step="4" points="63,104 63,745 1235,745 1235,104 63,104"/>
+      <polygon class="hole" fill="#000" data-step="5" points="40,835 40,1129 2349,1129 2349,835 40,835"/>
+            </mask></defs>
+            <rect class="dim" width="2400" height="1247" mask="url(#method-mask)"/>
+      <polygon class="outline" data-step="1" points="63,104 63,370 1098,370 1098,640 2340,640 2340,331 1228,331 1228,104 63,104"/>
+      <polygon class="outline" data-step="2" points="1140,333 1140,780 2385,780 2385,333 1140,333"/>
+      <polygon class="outline" data-step="3" points="1095,141 1095,333 2298,333 2298,141 1095,141"/>
+      <polygon class="outline" data-step="4" points="63,104 63,745 1235,745 1235,104 63,104"/>
+      <polygon class="outline" data-step="5" points="40,835 40,1129 2349,1129 2349,835 40,835"/>
+          </svg>
         </div>
-        <div class="card">
-          <span class="idx">2</span>
-          <h3>Roughness-gated rewards</h3>
-          <p>Training rewards favor rolling on smooth ground and lifting the wheels on rough terrain.</p>
+        <div class="method-tabs" role="tablist" aria-label="Method steps">
+        <button type="button" role="tab" data-step="0" aria-selected="true"><span class="n">1</span>Overview</button>
+        <button type="button" role="tab" data-step="1" aria-selected="false"><span class="n">2</span>Teacher</button>
+        <button type="button" role="tab" data-step="2" aria-selected="false"><span class="n">3</span>Roughness-gated rewards</button>
+        <button type="button" role="tab" data-step="3" aria-selected="false"><span class="n">4</span>Latent dynamics</button>
+        <button type="button" role="tab" data-step="4" aria-selected="false"><span class="n">5</span>Student</button>
+        <button type="button" role="tab" data-step="5" aria-selected="false"><span class="n">6</span>Deployment</button>
         </div>
-        <div class="card">
-          <span class="idx">3</span>
-          <h3>Latent dynamics modeling</h3>
-          <p>Predicting future latent states shapes a representation the student can imitate more easily.</p>
-        </div>
-      </div>
-      <div class="method-media single">
-        <figure class="figure paper">
-          <a class="img-link" href="static/images/robot_depth_fov.jpg" target="_blank" rel="noopener" title="Open the full-size figure"><img src="static/images/robot_depth_fov.jpg" alt="TRON1 in simulation with the field of view of its front depth camera covering the ground ahead." loading="lazy"></a>
-          <figcaption>A front depth camera sees the terrain before the wheels reach it</figcaption>
-        </figure>
+      <p class="method-cap" data-step="0">Training uses privileged information; deployment uses onboard sensing only.</p>
+      <p class="method-cap" data-step="1" hidden>The teacher encodes robot states, terrain heights and dynamics parameters into a latent. The actor uses it with proprioception to control the legs and wheels.</p>
+      <p class="method-cap" data-step="2" hidden>Roughness from local height variations gates the rewards: roll on smooth ground, step on rough terrain. PPO updates the teacher, actor and critic.</p>
+      <p class="method-cap" data-step="3" hidden>Predicting future latents and base velocity from actions helps the representation capture how the robot responds.</p>
+      <p class="method-cap" data-step="4" hidden>A student reproduces the teacher latent from onboard depth and proprioceptive history, and estimates base velocity and terrain roughness.</p>
+      <p class="method-cap" data-step="5" hidden>The student replaces the teacher. The same actor maps depth, proprioceptive history and velocity commands to leg and wheel targets.</p>
       </div>
     </div>
   </section>
@@ -169,20 +184,17 @@
       <div class="sub">
         <h3 class="sub-title">Roll → step → roll across terrains</h3>
         <div class="terrain-tabs" role="tablist" aria-label="Terrain" id="terrain-tabs"></div>
-        <div class="terrain-stage single" id="terrain-panel" role="tabpanel">
-          <div class="viewer-bar">
-            <div class="seg" role="group" aria-label="Camera view" id="terrain-view">
-              <button type="button" aria-pressed="true" data-view="side">Side + depth input</button>
-              <button type="button" aria-pressed="false" data-view="rear34">Rear</button>
-            </div>
+        <div class="terrain-stage pair" id="terrain-panel" role="tabpanel">
+          <div class="grid cols-2">
+            <figure class="clip zoomable">
+              <div class="media"><video id="terrain-video" muted loop playsinline preload="none"></video></div>
+              <figcaption>Side view with the depth input</figcaption>
+            </figure>
+            <figure class="clip zoomable">
+              <div class="media"><video id="terrain-video-rear" muted loop playsinline preload="none"></video></div>
+              <figcaption>Rear view</figcaption>
+            </figure>
           </div>
-          <figure class="clip zoomable">
-            <div class="media">
-              
-              <video id="terrain-video" muted loop playsinline preload="none"></video>
-            </div>
-            <figcaption id="terrain-caption"></figcaption>
-          </figure>
         </div>
         <figure class="figure paper frf">
           <a class="img-link" href="static/images/frf_traj_height.jpg" target="_blank" rel="noopener" title="Open the full-size figure"><img src="static/images/frf_traj_height.jpg" alt="Snapshots of the robot crossing a flat, tilted-grid and flat course with base and wheel traces, and a plot of wheel heights that stay constant on flat ground and alternate on the grid." loading="lazy"></a>
@@ -192,19 +204,17 @@
 
       <div class="sub">
         <h3 class="sub-title">Ten terrains in one run</h3>
-        <div class="feature-narrow">
-          <div class="viewer-bar">
-            <div class="seg" role="group" aria-label="Camera view" data-switch="longcourse">
-              <button type="button" aria-pressed="true" data-src="static/videos/sim/long_course_side.mp4" data-poster="static/videos/sim/long_course_side.jpg">Side + depth input</button>
-              <button type="button" aria-pressed="false" data-src="static/videos/sim/long_course_rear.mp4" data-poster="static/videos/sim/long_course_rear.jpg">Rear</button>
-            </div>
-          </div>
+        <div class="grid cols-2">
           <figure class="clip zoomable">
-            <div class="media">
-              <video class="lazy" id="longcourse" muted loop playsinline preload="none" poster="static/videos/sim/long_course_side.jpg" data-src="static/videos/sim/long_course_side.mp4"></video></div>
-            <figcaption>Slopes, rough ground, tilted grid, obstacles, stairs, boxes and stepping stones in a single run</figcaption>
+            <div class="media"><video class="lazy" muted loop playsinline preload="none" poster="static/videos/sim/long_course_side.jpg" data-src="static/videos/sim/long_course_side.mp4"></video></div>
+            <figcaption>Side view with the depth input</figcaption>
+          </figure>
+          <figure class="clip zoomable">
+            <div class="media"><video class="lazy" muted loop playsinline preload="none" poster="static/videos/sim/long_course_rear.jpg" data-src="static/videos/sim/long_course_rear.mp4"></video></div>
+            <figcaption>Rear view</figcaption>
           </figure>
         </div>
+        <p class="sub-note">Slopes, rough ground, tilted grid, obstacles, stairs, boxes and stepping stones in a single run</p>
       </div>
 
       <div class="sub">
