@@ -138,7 +138,7 @@
       });
     };
     var tick = function () { showStep((mCur + 1) % mBtns.length); };
-    var start = function () { if (mAuto && !mTimer) mTimer = setInterval(tick, 5000); };
+    var start = function () { if (mAuto && !mTimer) mTimer = setInterval(tick, 3500); };
     var stop = function () { clearInterval(mTimer); mTimer = null; };
     mBtns.forEach(function (b) {
       b.addEventListener('click', function () { mAuto = false; stop(); showStep(Number(b.dataset.step)); });
