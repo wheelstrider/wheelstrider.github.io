@@ -46,7 +46,7 @@
   </video>
   <div class="hero-content">
     <h1>WheelStrider</h1>
-    <p class="subtitle">Sim-to-Real Learning Unified Perceptive Hybrid Locomotion for Wheeled Bipeds</p>
+    <p class="subtitle">Sim-to-Real Learning Unified Perceptive Hybrid Locomotion<br>for Wheeled Bipeds</p>
     <p class="authors">Anonymous Authors <span class="sep" aria-hidden="true">·</span> <span class="venue">Under review</span></p>
     <div class="links">
       <span class="btn disabled" title="The paper will be linked here once it is public">
@@ -152,12 +152,7 @@
           <p>Predicting future latent states shapes a representation the student can imitate more easily.</p>
         </div>
       </div>
-      <div class="grid cols-2 method-media">
-          <figure class="clip zoomable">
-            <div class="media"><span class="badge sim">Simulation</span>
-              <video class="lazy" muted loop playsinline preload="none" poster="static/videos/sim/training_mjwarp.jpg" data-src="static/videos/sim/training_mjwarp.mp4"></video></div>
-            <figcaption>Trained with thousands of parallel robots in MuJoCo-Warp</figcaption>
-          </figure>
+      <div class="method-media single">
         <figure class="figure paper">
           <a class="img-link" href="static/images/robot_depth_fov.jpg" target="_blank" rel="noopener" title="Open the full-size figure"><img src="static/images/robot_depth_fov.jpg" alt="TRON1 in simulation with the field of view of its front depth camera covering the ground ahead." loading="lazy"></a>
           <figcaption>A front depth camera sees the terrain before the wheels reach it</figcaption>
@@ -183,7 +178,7 @@
           </div>
           <figure class="clip zoomable">
             <div class="media">
-              <span class="badge sim">Simulation · 1×</span>
+              
               <video id="terrain-video" muted loop playsinline preload="none"></video>
             </div>
             <figcaption id="terrain-caption"></figcaption>
@@ -205,7 +200,7 @@
             </div>
           </div>
           <figure class="clip zoomable">
-            <div class="media"><span class="badge sim">Simulation · 1×</span>
+            <div class="media">
               <video class="lazy" id="longcourse" muted loop playsinline preload="none" poster="static/videos/sim/long_course_side.jpg" data-src="static/videos/sim/long_course_side.mp4"></video></div>
             <figcaption>Slopes, rough ground, tilted grid, obstacles, stairs, boxes and stepping stones in a single run</figcaption>
           </figure>
@@ -215,27 +210,16 @@
       <div class="sub">
         <h3 class="sub-title">Omnidirectional locomotion</h3>
         <div class="grid cols-2">
-          <div>
-            <div class="viewer-bar">
-              <div class="seg" role="group" aria-label="Camera view" data-switch="omni">
-                <button type="button" aria-pressed="true" data-src="static/videos/sim/omni_flat_side.mp4" data-poster="static/videos/sim/omni_flat_side.jpg">Side</button>
-                <button type="button" aria-pressed="false" data-src="static/videos/sim/omni_flat_rear.mp4" data-poster="static/videos/sim/omni_flat_rear.jpg">Rear</button>
-              </div>
-            </div>
           <figure class="clip zoomable">
-            <div class="media"><span class="badge sim">Simulation · 1×</span>
-              <video class="lazy" id="omni" muted loop playsinline preload="none" poster="static/videos/sim/omni_flat_side.jpg" data-src="static/videos/sim/omni_flat_side.mp4"></video></div>
-            <figcaption>Rolling forward and backward, stepping sideways</figcaption>
+            <div class="media">
+              <video class="lazy" muted loop playsinline preload="none" poster="static/videos/sim/omni_flat_side.jpg" data-src="static/videos/sim/omni_flat_side.mp4"></video></div>
+            <figcaption>Side view</figcaption>
           </figure>
-          </div>
-          <div>
-            <div class="viewer-bar"></div>
           <figure class="clip zoomable">
-            <div class="media"><span class="badge sim">Sim-to-sim · 1×</span>
-              <video class="lazy" muted loop playsinline preload="none" poster="static/videos/sim/omni_sim2sim.jpg" data-src="static/videos/sim/omni_sim2sim.mp4"></video></div>
-            <figcaption>Sim-to-sim in MuJoCo with the deployment controller</figcaption>
+            <div class="media">
+              <video class="lazy" muted loop playsinline preload="none" poster="static/videos/sim/omni_flat_rear.jpg" data-src="static/videos/sim/omni_flat_rear.mp4"></video></div>
+            <figcaption>Rear view</figcaption>
           </figure>
-          </div>
         </div>
       </div>
     </div>
@@ -353,9 +337,9 @@
       </div>
 
       <div class="sub">
-        <h3 class="sub-title">Rolling on flat ground and terrain transitions</h3>
-        <div class="two-col flat-row">
-          <div class="grid stack">
+        <h3 class="sub-title">Rolling on flat ground</h3>
+        <div class="flat-only">
+          <div class="grid cols-2">
           <figure class="clip zoomable">
             <div class="media"><span class="badge">Real robot · 1×</span>
               <video class="lazy" muted loop playsinline preload="none" poster="static/videos/real/indoor_flat_1.jpg" data-src="static/videos/real/indoor_flat_1.mp4"></video></div>
@@ -367,10 +351,6 @@
             <figcaption>Rolling across the lab floor</figcaption>
           </figure>
           </div>
-          <figure class="figure">
-            <a class="img-link" href="static/images/real_world_terrain_traversal.jpg" target="_blank" rel="noopener" title="Open the full-size figure"><img src="static/images/real_world_terrain_traversal.jpg" alt="Outdoor terrain traversal: crossing a raised step on a paved path, moving between pavement and grass, and stepping on grass." loading="lazy"></a>
-            <figcaption>Raised step on a paved path · pavement to grass · stepping on grass</figcaption>
-          </figure>
         </div>
       </div>
     </div>

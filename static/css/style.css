@@ -497,3 +497,7 @@ details.more summary:focus-visible { border-radius: var(--radius); }
   .hero .subtitle { font-size: 1.2rem; }
   .hero .authors { font-size: 1.05rem; }
 }
+
+/* single centered depth-camera figure in the method section */
+.method-media.single { max-width: 760px; margin: 40px auto 0; }
+.flat-only { max-width: 1080px; margin-inline: auto; }
